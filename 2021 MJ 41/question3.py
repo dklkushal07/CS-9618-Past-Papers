@@ -32,12 +32,18 @@ def readData():
     try:
         file = open(filename, "r")
         dataFetched = (file.readline()).strip()
-        while dataFetched != " ":
+        global arrayTreasure
+        arrayTreasure = [TreasureChest(None, None, None) for xyz in range(5)]
+        counter = 0
+        while dataFetched:
             question = dataFetched
+            global answer
             answer = (file.readline()).strip()
             points = (file.readline()).strip()
-            arrayTreasure = [TreasureChest(question, answer, points)]
+            arrayTreasure[counter] = TreasureChest(question, answer, points)
+            counter += 1
             dataFetched = (file.readline()).strip()
+
         file.close()
     except IOError:
         print("The file is not found")
@@ -49,7 +55,7 @@ if 0 < choice < 6:
     result = False
     attempts = 0
     while not result:
-        answer = int(input(arrayTreasure[choice - 1].getQuestion))
-        result = arrayTreasure[choice - 1].checkAnswer
+        answer = int(input(arrayTreasure[choice - 1].getQuestion()))
+        result = arrayTreasure[choice - 1].checkAnswer(answer)
         attempts = attempts + 1
-        print("You got", arrayTreasure[choice - 1].getPoints(attempts), "points")
+    print("You got", arrayTreasure[choice - 1].getPoints(attempts), "points")
