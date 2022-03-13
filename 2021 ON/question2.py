@@ -24,4 +24,22 @@ class Picture:
         self.__Description = DescriptionP
     
 PictureArray = [Picture("",0,0,"") for _ in range(100)]
-print(PictureArray)
+
+def ReadData(PictureArray):
+    filename = "Pictures.txt"
+    counter = 0
+    # try:
+    file = open(filename,'r')
+    Description = file.readline().strip().lower()
+    while Description != "":
+        Width = file.readline().strip()
+        Height = file.readline().strip()
+        FrameColour = file.readline().strip().lower()
+        PictureArray[counter] = Picture(Description, Width, Height, FrameColour)
+        counter += 1
+        Description = file.readline().strip().lower()
+    # except IOError:
+    #     print("The file doesn't exist")
+    return counter, PictureArray
+
+print(ReadData(PictureArray))
