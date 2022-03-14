@@ -52,3 +52,56 @@
 
 # 2nd Attempt in solving this question using a new approach
 
+
+QueueData = [None for _ in range(20)]
+StartPointer = 0
+EndPointer = 0
+
+def Enqueue(itemToAdd):
+    global EndPointer,QueueData
+    if EndPointer == 20:
+        return False
+    else:
+        QueueData[EndPointer] = itemToAdd
+        EndPointer += 1
+        return True
+
+def ReadFile():
+    filename = str(input("Enter the file path"))
+    try:
+        file = open(filename,'r')
+        slot = True
+        currentText = (file.readline()).strip()
+        while slot and currentText != "":
+            slot = Enqueue(currentText)
+            currentText = (file.readline()).strip()
+            print(QueueData)
+        if slot:
+            return 1
+        else:
+            return 2
+    except IOError:
+        return -1
+    
+returnedValue = ReadFile()
+if returnedValue == 1:
+    print("All the items were added to the queue")
+elif returnedValue == 2:
+    print("The queue was full")
+else:
+    print("The text file could not be found")
+
+
+def Remove():
+    global QueueData,StartPointer
+    removed_elements = []
+    if len(QueueData) >= 2 and (returnedValue == 2 or returnedValue == 1):
+        for i in range(2):
+            removed_elements.append(QueueData[StartPointer])
+            QueueData[StartPointer] = None
+            StartPointer = StartPointer + 1
+        return (removed_elements[0] + " " + removed_elements[1])
+    else:
+        return("No Items")
+    
+print(Remove())
