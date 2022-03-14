@@ -58,7 +58,6 @@ for i in range(0,99,1):
     if UserInputted.getWidth() >= PictureArray[i].getWidth() \
         and UserInputted.getHeight() >= PictureArray[i].getHeight() \
             and UserInputted.getColour() == PictureArray[i].getColour():
-                UserInputted.setDescription(PictureArray[i].getDescription())
                 print("found",PictureArray[i].getDescription(),\
                     "with",PictureArray[i].getHeight(),"height",\
                         PictureArray[i].getWidth(),"width",\
