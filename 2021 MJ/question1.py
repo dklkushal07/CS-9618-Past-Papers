@@ -39,7 +39,6 @@ def addNode(LinkedList,StartPointer,EmptyList):
             prevPointer = StartPointer
             StartPointer = LinkedList[StartPointer].nextNode
         LinkedList[prevPointer].nextNode = EmptyList
-        EmptyList = LinkedList[EmptyList].nextNode
         return True
 
 if addNode(linkedList,startPointer,emptyList):
